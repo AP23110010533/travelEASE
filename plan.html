@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Travel Plan | TravelEASE</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .plan-container {
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+    }
+    .trip-header {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .day-card {
+      background: #f0f8ff;
+      border-left: 5px solid #0077b6;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="plan-container">
+    <div class="trip-header" id="trip-header">Loading your plan...</div>
+    <div id="trip-plan"></div>
+    <button onclick="window.location.href='homepage.html'">Generate Another Plan</button>
+  </div>
+
+  <script>
+    const plan = localStorage.getItem("tripPlan");
+    const data = JSON.parse(localStorage.getItem("tripData"));
+    const user = JSON.parse(localStorage.getItem("user"));
+  
+    document.getElementById("trip-header").innerText = `Hi ${user?.name || "Traveler"}, here’s your personalized plan for ${data.destination}`;
+  
+    const formatted = plan
+  .split(/\n{2,}/)
+  .map(p => `<div class="day-card">${p.replace(/\n/g, "<br>").replace(/itinerary/gi, "package")}</div>`)
+  .join("");
+  
+    document.getElementById("trip-plan").innerHTML = formatted || "<p>No plan available.</p>";
+  </script>
+  
+</body>
+</html>

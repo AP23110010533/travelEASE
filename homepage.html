@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelEASE - AI Travel Planner</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>TravelEASE</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">My package</a></li>
+                <li><a href="#">Destinations</a></li>
+                <li><a href="#">How It Works</a></li>
+                <li><a href="#">Pricing</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a class="btn btn-outline-primary" href="login.html">Sign In</a>
+
+                <button class="btn btn-primary">Get Started</button>
+            </div>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Plan Your Perfect Trip in Seconds</h1>
+                <p>Let our AI create a personalized travel package based on your preferences</p>
+                <button class="btn btn-primary btn-large" id="get-started-btn">Create Your package</button>
+            </div>
+            <div class="hero-image">
+                <img src="world.jpg" alt="travel image">
+            </div>
+        </section>
+        <div id="trip-plan"></div>
+
+        <section class="how-it-works">
+            <div class="container">
+                <h2>How TravelEASE Works</h2>
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Tell Us Where You're Going</h3>
+                        <p>Enter your destination, travel dates, and number of travelers</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-sliders-h"></i>
+                        </div>
+                        <h3>Customize Your Preferences</h3>
+                        <p>Set your budget, interests, and travel style</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-magic"></i>
+                        </div>
+                        <h3>Generate Your package</h3>
+                        <p>Our AI creates a personalized day-by-day plan</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                        <h3>Edit and Finalize</h3>
+                        <p>Make adjustments and save your perfect package</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="planner-form-section" id="planner-form">
+            <div class="container">
+                <div class="form-container">
+                    <h2>Start Planning Your Trip</h2>
+                    <form id="package-form" novalidate>
+                        <div class="form-group">
+                            <label for="destination">Where are you going?</label>
+                            <div class="input-icon-wrapper">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="destination" name="destination" placeholder="City, Country or Region" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="start-date">Start Date</label>
+                                <div class="input-icon-wrapper">
+                                    <i class="fas fa-calendar"></i>
+                                    <input type="date" id="start-date" name="start-date" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="end-date">End Date</label>
+                                <div class="input-icon-wrapper">
+                                    <i class="fas fa-calendar"></i>
+                                    <input type="date" id="end-date" name="end-date" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="travelers">Travelers</label>
+                                <div class="input-icon-wrapper">
+                                    <i class="fas fa-user-friends"></i>
+                                    <select id="travelers" name="travelers" required>
+                                        <option value="1">1 Traveler</option>
+                                        <option value="2">2 Travelers</option>
+                                        <option value="3">3 Travelers</option>
+                                        <option value="4">4 Travelers</option>
+                                        <option value="5+">5+ Travelers</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="trip-type">Trip Type</label>
+                                <div class="input-icon-wrapper">
+                                    <i class="fas fa-suitcase"></i>
+                                    <select id="trip-type" name="trip-type" required>
+                                        <option value="business">Business</option>
+                                        <option value="family">Family</option>
+                                        <option value="couple">Couple</option>
+                                        <option value="solo">Solo</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="button" class="btn btn-secondary" id="advanced-options-btn">
+                            <i class="fas fa-cog"></i> Advanced Options
+                        </button>
+                        
+                        <div class="advanced-options hidden" id="advanced-options">
+                            <h3>Find Your Comfort!</h3>
+                            <div class="form-group">
+                                <label for="budget">Budget (₹)</label>
+                                <div class="input-icon-wrapper">
+                                    <i class="fas fa-rupee-sign"></i>
+                                    <input type="number" id="budget" name="budget" placeholder="Enter exact amount in ₹" min="0" step="100">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Travel Interests</label>
+                                <div class="interests-grid">
+                                    <div class="interest-option">
+                                        <input type="checkbox" id="interest-landmarks" name="interests[]" value="landmarks">
+                                        <label for="interest-landmarks">
+                                            <i class="fas fa-landmark"></i>
+                                            <span>Landmarks</span>
+                                        </label>
+                                    </div>
+                                    <div class="interest-option">
+                                        <input type="checkbox" id="interest-food" name="interests[]" value="food">
+                                        <label for="interest-food">
+                                            <i class="fas fa-utensils"></i>
+                                            <span>Food</span>
+                                        </label>
+                                    </div>
+                                    <div class="interest-option">
+                                        <input type="checkbox" id="interest-nature" name="interests[]" value="nature">
+                                        <label for="interest-nature">
+                                            <i class="fas fa-leaf"></i>
+                                            <span>Nature</span>
+                                        </label>
+                                    </div>
+                                    <div class="interest-option">
+                                        <input type="checkbox" id="interest-shopping" name="interests[]" value="shopping">
+                                        <label for="interest-shopping">
+                                            <i class="fas fa-shopping-bag"></i>
+                                            <span>Shopping</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="pace">Trip Vibe</label>
+                                <div class="pace-slider">
+                                    <span>Relaxed</span>
+                                    <input type="range" id="pace" name="pace" min="1" max="5" value="3">
+                                    <span>Busy</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="special-requests">Special Requests</label>
+                                <textarea id="special-requests" name="special-requests" placeholder="Any specific activities, restaurants, or places you'd like to include?"></textarea>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-large">Generate package</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        
+        <section class="trip-plan-section" id="trip-plan">
+            <div class="container">
+                <div id="trip-plan-content"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <h2>TravelEASE</h2>
+                    </div>
+                    <p>AI-powered travel planning made simple.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Travel Guides</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 TravelEASE. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="java.js"></script>
+    
+</body>
+</html>
